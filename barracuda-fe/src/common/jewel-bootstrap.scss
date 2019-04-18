@@ -1,0 +1,89 @@
+/**
+ * Additional custom classes in bootstrap style for using in the project.
+ */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/** Sizing */
+.w-20 {
+  width: 20%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.h-85 {
+  height: 85%;
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+.wh-50 {
+  height: 50%;
+  width: 50%;
+}
+
+.wh-250px {
+  height: 250px;
+  width: 250px;
+}
+
+.mw-120px {
+  min-width: 120px;
+}
+
+.wh-1em {
+  height: 1em;
+  width: 1em;
+}
+
+.wh-2em {
+  height: 2em;
+  width: 2em;
+}
+
+.wh-8rem {
+  height: 8rem;
+  width: 8rem;
+}
+
+/** Transform */
+.of-hidden {
+  overflow: hidden;
+}
+
+/** Other */
+.image-fill {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+// TODO: Correct style.
+.custom-form-control-input {
+  &:focus-within {
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    color: $input-focus-color;
+    outline: 0;
+    // Avoid using mixin so we can pass custom focus shadow properly
+    @if $enable-shadows {
+      box-shadow: $input-box-shadow, $input-focus-box-shadow;
+    } @else {
+      box-shadow: $input-focus-box-shadow;
+    }
+  }
+
+  input {
+    border: none;
+    outline: none;
+  }
+}
