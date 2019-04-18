@@ -1,15 +1,13 @@
-// Include http module.
-var http = require('http');
+var express = require('express');
+var app = express();
 
-// Create http server.
-var httpServer = http.createServer(function (req, resp) {
-
-    resp.writeHeader(200);
-
-    resp.end('This is a node js created http web server. ');
+app.get('/', function (req, res) {
+    var result = false;
+    if (req.query.word === "член") {
+        result = true;
+    }
+    res.send('result: ' + result);
 });
 
-// Http server listen on port 5000.
-httpServer.listen(5000);
-
-console.log("Http web server listening on port 5000. Access it with url http://localhost:5000.");
+app.listen(5000);
+console.log("Try it now bitch http://localhost:5000/word=член");
