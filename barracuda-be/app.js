@@ -1,8 +1,8 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 app.get('/', function (req, res) {
-    var result = false;
+    let result = false;
     if (req.query.word === "член") {
         result = true;
     }
@@ -10,4 +10,4 @@ app.get('/', function (req, res) {
 });
 
 app.listen(5000);
-console.log("Try it now bitch http://localhost:5000?word=член");
+console.log("Try it now bitch http://localhost:5000?word=123");
