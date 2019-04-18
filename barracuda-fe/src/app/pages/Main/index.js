@@ -16,15 +16,17 @@ class Main extends Component {
   }
 
   handleSend(event) {
-    axios.get(`localhost:5000?word=${this.state.text}`)
+    console.log(1, this.state.text);
+    axios.get(`http://localhost:5000?word=${this.state.text}`)
       .then((response) => {
-        alert('response', response);
+        alert(`response: ${response.data}`);
         console.log('response', response);
       })
       .catch((error) => {
-        alert('error', error);
+        alert(`error: ${error}`);
         console.log('error', error);
       });
+    this.setState({ text: '' });
     event.preventDefault();
   }
 
@@ -36,7 +38,7 @@ class Main extends Component {
           className='w-75 my-4'
           value={this.state.text}
           onChange={this.handleChange}
-         />
+        />
         <input
           type='submit'
           value='Send'
