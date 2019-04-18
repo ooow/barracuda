@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(cors());
+
 app.get('/', function (req, res) {
     let result = false;
     if (req.query.word === "член") {
