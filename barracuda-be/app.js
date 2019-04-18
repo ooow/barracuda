@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const badWords = [
@@ -29,7 +30,7 @@ app.use(cors());
 
 app.get('/', function (req, res) {
     let result = false;
-    if (req.query.word === "член") {
+    if (badWords.indexOf(req.query.word) >= 0) {
         result = true;
     }
     res.send('result: ' + result);
