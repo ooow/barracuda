@@ -19,6 +19,7 @@
 # trash
 .idea
 package-lock.json
+barracuda-fe.iml
 
 npm-debug.log*
 yarn-debug.log*
