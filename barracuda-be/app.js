@@ -10,4 +10,4 @@ app.get('/', function (req, res) {
 });
 
 app.listen(5000);
-console.log("Try it now bitch http://localhost:5000/word=член");
+console.log("Try it now bitch http://localhost:5000?word=член");
