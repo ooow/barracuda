@@ -3,9 +3,18 @@ import axios from 'axios';
 
 /** Component renders the main page. */
 class Main extends Component {
+
+  http = axios.create({
+    baseURL: 'http://localhost:5000/',
+    timeout: 5000,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
   constructor(props) {
     super(props);
-    this.state = { text: '' };
+    this.state = { text: 'Этот текст абсолютно тестовый блядь', result: [] };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
@@ -16,18 +25,33 @@ class Main extends Component {
   }
 
   handleSend(event) {
-    console.log(1, this.state.text);
-    axios.get(`http://localhost:5000?word=${this.state.text}`)
+    this.http.post('check', { text: this.state.text })
       .then((response) => {
-        alert(`response: ${response.data}`);
-        console.log('response', response);
+        this.setState(prevState => ({
+          ...prevState,
+          result: response.data.body,
+        }));
+        console.log('response', response.data.body);
       })
       .catch((error) => {
         alert(`error: ${error}`);
         console.log('error', error);
       });
-    this.setState({ text: '' });
+    //this.setState({ text: '' }); // Clean text area after sending.
     event.preventDefault();
+  }
+
+  renderResult() {
+    const { result } = this.state;
+    return result.length > 0 ? (
+      <div>
+        <span>Results:</span>
+        {result.map((r, i) => (
+          <div key={i}>{r.word} : {r.isBad ? 'true' : 'false'}</div>
+        ))
+        }
+      </div>
+    ) : (<div />);
   }
 
   render() {
@@ -44,6 +68,7 @@ class Main extends Component {
           value='Send'
           onClick={this.handleSend}
         />
+        {this.renderResult()}
       </div>
     );
   }
