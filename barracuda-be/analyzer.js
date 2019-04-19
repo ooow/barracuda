@@ -1,24 +1,22 @@
 // Interface.
 export class Bit {
-  constructor(data, type = 0) {
+  constructor(data, isWord = true, isBad = false) {
     this.data = data;
-    this.type = type; // 0 is a word, 1 is a symbol.
+    this.isWord = isWord; // true is a word, false is a symbol.
+    this.isBad = isBad;
   }
 }
 
 export class Analyzer {
-  constructor(arr = []) {
-    this.arr = arr;
+  constructor(text = '') {
+    this.arr = splitText(text);
   }
 
   run() {
     return this.arr.map(bit => {
-      return { word: bit.data, isBad: this.isBadWord(bit.data) };
+      bit = checkIsBad(bit);
+      return bit;
     });
-  }
-
-  isBadWord(word) {
-    return badWords.indexOf(word) !== -1;
   }
 }
 
@@ -34,7 +32,7 @@ export function splitText(text) {
       if (word.length !== 0) {
         res.push(new Bit(word));
       }
-      res.push(new Bit(c, 1));
+      res.push(new Bit(c, false));
       word = '';
     }
   }
@@ -42,6 +40,17 @@ export function splitText(text) {
     res.push(new Bit(word));
   }
   return res;
+}
+
+// Marks the bit as bad when is contains a bad word.
+export function checkIsBad(bit) {
+  if (!bit.isWord) {
+    return bit;
+  }
+  if (badWords.indexOf(bit.data) !== -1) {
+    bit.isBad = true;
+  }
+  return bit;
 }
 
 // Temporary base.

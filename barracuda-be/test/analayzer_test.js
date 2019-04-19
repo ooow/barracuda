@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Analyzer, Bit, splitText } from '../analyzer';
+import { Analyzer, Bit, checkIsBad, splitText } from '../analyzer';
 import { describe } from 'mocha';
 
 describe('analyzer', () => {
@@ -7,95 +7,136 @@ describe('analyzer', () => {
     let underTest;
 
     beforeEach(() => {
-      underTest = new Analyzer(['abs', '123', 'блядь']);
+      underTest = new Analyzer('z 7 блядь!привет');
     });
 
     it('runs analyzer', () => {
       expect(underTest.run()).to.deep.equal([
         {
-          word: 'abs',
+          data: 'z',
+          isWord: false,
           isBad: false,
         },
         {
-          word: '123',
+          data: ' ',
+          isWord: false,
           isBad: false,
-        }, {
-          word: 'блядь',
+        },
+        {
+          data: '7',
+          isWord: false,
+          isBad: false,
+        },
+        {
+          data: ' ',
+          isWord: false,
+          isBad: false,
+        },
+        {
+          data: 'блядь',
+          isWord: true,
           isBad: true,
-        }]);
+        },
+        {
+          data: '!',
+          isWord: false,
+          isBad: false,
+        },
+        {
+          data: 'привет',
+          isWord: true,
+          isBad: false,
+        },
+      ]);
     });
   });
 
   describe('analyzer functions', () => {
-    let hello;
-    let world;
-    let space;
-    let dot;
+    describe('splitText', () => {
+      let hello;
+      let world;
+      let space;
+      let dot;
 
-    beforeEach(() => {
-      hello = new Bit('привет');
-      world = new Bit('мир');
-      space = new Bit(' ', 1);
-      dot = new Bit('.', 1);
-    });
+      beforeEach(() => {
+        hello = new Bit('привет');
+        world = new Bit('мир');
+        space = new Bit(' ', false);
+        dot = new Bit('.', false);
+      });
 
-    it('splits text to array of word 1', () => {
-      expect(splitText('привет мир')).to.deep.equal([hello, space, world]);
-    });
+      it('splits text to array of word 1', () => {
+        expect(splitText('привет мир')).to.deep.equal([hello, space, world]);
+      });
 
-    it('splits text to array of word 2', () => {
-      expect(splitText('привет .')).to.deep.equal([hello, space, dot]);
-    });
+      it('splits text to array of word 2', () => {
+        expect(splitText('привет .')).to.deep.equal([hello, space, dot]);
+      });
 
-    it('splits text to array of word 3', () => {
-      expect(splitText('привет!.')).to.deep.equal([
-        hello,
-        new Bit('!', 1),
-        dot,
-      ]);
-    });
-
-    it('splits text to array of word 4', () => {
-      expect(splitText('привет.мир')).to.deep.equal([hello, dot, world]);
-    });
-
-    it('splits text to array of word 6', () => {
-      expect(splitText('привет МИР')).to.deep.equal([
-        hello,
-        space,
-        new Bit('МИР', 0),
-      ]);
-    });
-
-    it('splits text to array of word 7', () => {
-      expect(splitText('ПРИВЕТ')).to.deep.equal([new Bit('ПРИВЕТ', 0)]);
-    });
-
-    it('splits text to array of word 8', () => {
-      expect(splitText(';123/')).to.deep
-        .equal([
-          new Bit(';', 1),
-          new Bit('1', 1),
-          new Bit('2', 1),
-          new Bit('3', 1),
-          new Bit('/', 1),
+      it('splits text to array of word 3', () => {
+        expect(splitText('привет!.')).to.deep.equal([
+          hello,
+          new Bit('!', false),
+          dot,
         ]);
+      });
+
+      it('splits text to array of word 4', () => {
+        expect(splitText('привет.мир')).to.deep.equal([hello, dot, world]);
+      });
+
+      it('splits text to array of word 6', () => {
+        expect(splitText('привет МИР')).to.deep.equal([
+          hello,
+          space,
+          new Bit('МИР', true),
+        ]);
+      });
+
+      it('splits text to array of word 7', () => {
+        expect(splitText('ПРИВЕТ')).to.deep.equal([new Bit('ПРИВЕТ', true)]);
+      });
+
+      it('splits text to array of word 8', () => {
+        expect(splitText(';123/')).to.deep
+          .equal([
+            new Bit(';', false),
+            new Bit('1', false),
+            new Bit('2', false),
+            new Bit('3', false),
+            new Bit('/', false),
+          ]);
+      });
+
+      it('splits text to array of word 9', () => {
+        expect(splitText('`d Привет wj МИР ')).to.deep
+          .equal([
+            new Bit('`', false),
+            new Bit('d', false),
+            space,
+            new Bit('Привет', true),
+            space,
+            new Bit('w', false),
+            new Bit('j', false),
+            space,
+            new Bit('МИР', true),
+            space,
+          ]);
+      });
     });
 
-    it('splits text to array of word 9', () => {
-      expect(splitText('`d Привет wj МИР ')).to.deep
-        .equal([
-          new Bit('`', 1),
-          new Bit('d', 1),
-          space,
-          new Bit('Привет', 0),
-          space,
-          new Bit('w', 1),
-          new Bit('j', 1),
-          space,
-          new Bit('МИР', 0),
-          space,
-        ]);
+    describe('checkIsBad', () => {
+      it('marks the bit as bad', () => {
+        expect(checkIsBad(new Bit('блядь')).isBad).to.be.true;
+      });
+
+      it('skips symbol', () => {
+        expect(checkIsBad(new Bit(';')).isBad).to.be.false;
+      });
+
+      it('does not mark common word', () => {
+        expect(checkIsBad(new Bit('привет')).isBad).to.be.false;
+      });
     });
   });
 });
