@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Bit } from '../../model';
+import { http } from '../../axios';
+import NavBar from '../../components/NavBar';
 
 /** Component renders the main page. */
 class Main extends Component {
-
-  http = axios.create({
-    baseURL: 'http://localhost:5000/',
-    timeout: 5000,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 
   constructor(props) {
     super(props);
@@ -26,7 +19,7 @@ class Main extends Component {
   }
 
   handleSend(event) {
-    this.http.post('check', { text: this.state.text })
+    http.post('check', { text: this.state.text })
       .then((response) => {
         this.setState(prevState => ({
           ...prevState,
@@ -51,19 +44,22 @@ class Main extends Component {
 
   render() {
     return (
-      <div className='d-flex flex-column justify-content-center align-items-center h-100vh bg-light'>
-        Barracuda says Hi
-        <textarea
-          className='w-75 my-4'
-          value={this.state.text}
-          onChange={this.handleChange}
-        />
-        <input
-          type='submit'
-          value='Send'
-          onClick={this.handleSend}
-        />
-        {this.renderResult()}
+      <div className='container'>
+        <NavBar />
+        <div className='d-flex flex-column justify-content-center align-items-center bg-light'>
+          Barracuda says Hi
+          <textarea
+            className='w-75 my-4'
+            value={this.state.text}
+            onChange={this.handleChange}
+          />
+          <input
+            type='submit'
+            value='Send'
+            onClick={this.handleSend}
+          />
+          {this.renderResult()}
+        </div>
       </div>
     );
   }
