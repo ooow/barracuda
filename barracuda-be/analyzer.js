@@ -1,4 +1,5 @@
 import { Bit } from './model';
+import { badWords } from './bad';
 
 export class Analyzer {
   constructor(text = '') {
@@ -40,33 +41,8 @@ export function checkIsBad(bit) {
   if (!bit.isWord) {
     return bit;
   }
-  if (badWords.indexOf(bit.data) !== -1) {
+  if (badWords.has(bit.data)) {
     bit.isBad = true;
   }
   return bit;
 }
-
-// Temporary base.
-const badWords = [
-  'ебать',
-  'блядь',
-  'хуй',
-  'хер',
-  'елда',
-  'муде',
-  'пизда',
-  'манда',
-  'дрочить',
-  'залупа',
-  'пидарас',
-  'гандон',
-  'малафья',
-  'срать',
-  'ссать',
-  'пердеть',
-  'дристать',
-  'говно',
-  'жопа',
-  'целка',
-  'курва',
-];
