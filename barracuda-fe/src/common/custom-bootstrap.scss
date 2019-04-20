@@ -1,0 +1,34 @@
+@import 'colors';
+
+/**
+ * Additional custom classes in bootstrap style for using in the project.
+ */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.textarea {
+  min-height: 80px;
+  max-height: 250px;
+  height: 250px;
+}
+
+.wh-2em {
+  height: 2em;
+  width: 2em;
+}
+
+input {
+  &:focus-within {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+textarea {
+  &:focus-within {
+    box-shadow: none;
+    outline: none;
+  }
+}

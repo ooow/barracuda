@@ -49,19 +49,19 @@ class Dictionary extends Component {
         <div className='container'>
           <div className="row">
 
-            <div className='card mt-5 col-8 mr-3'>
+            <div className='card mt-5 col-8 mr-3 border'>
               <div className='card-body container'>
                 <h5 className='card-title w-100'>Add new bad word</h5>
                 <form onSubmit={this.submitBadWord}>
                   <input
                     type="text"
-                    className='w-100'
+                    className='w-100 custom-form-control-input'
                     placeholder='bad word...'
                     value={inputValue}
                     onChange={this.inputValueChange}
                   />
                   <input
-                    className='btn btn-primary w-100 mt-1'
+                    className='btn btn-secondary w-100 mt-1'
                     type="submit"
                     value="Submit"
                   />
@@ -69,7 +69,7 @@ class Dictionary extends Component {
               </div>
             </div>
 
-            <div className='card mt-5 col-sm'>
+            <div className='card mt-5 col-sm border'>
               <div className='card-body'>
                 <h5 className='card-title row'>Library size</h5>
                 <p className='card-text row'>{dictionarySize}</p>

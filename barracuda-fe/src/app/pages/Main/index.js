@@ -53,14 +53,14 @@ class Main extends Component {
           </div>
           <div className='row justify-content-center mb-2'>
             <textarea
-              className='col-8 textarea'
+              className='col-8 textarea border'
               value={text}
               onChange={this.handleChange}
             />
           </div>
           <div className='row justify-content-center mb-2'>
             <input
-              className='btn btn-primary col-3'
+              className='btn btn-secondary col-3'
               type='submit'
               value='Send'
               onClick={this.handleSend}
@@ -69,7 +69,7 @@ class Main extends Component {
           <div className='row justify-content-center mb-2'>
             <textarea
               readOnly
-              className='col-8 textarea'
+              className='col-8 textarea border'
               value={filteredText}
             />
           </div>

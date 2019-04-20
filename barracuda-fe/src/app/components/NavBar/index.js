@@ -8,7 +8,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className='navbar navbar-light bg-white border-bottom'>
+      <nav className='navbar navbar-light border-bottom'>
         <div className='container d-flex flex-sm-nowrap justify-content-between'>
           <a className='navbar-brand mx-1 p-0 d-none d-sm-inline' href='/'>
             <img
