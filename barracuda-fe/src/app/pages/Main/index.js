@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Bit } from '../../model';
 
 /** Component renders the main page. */
 class Main extends Component {
@@ -29,13 +30,8 @@ class Main extends Component {
       .then((response) => {
         this.setState(prevState => ({
           ...prevState,
-          result: response.data.body,
+          result: response.data.body.map(b => new Bit(b.data, b.isWord, b.isBad)),
         }));
-        console.log('response', response.data.body);
-      })
-      .catch((error) => {
-        alert(`error: ${error}`);
-        console.log('error', error);
       });
     //this.setState({ text: '' }); // Clean text area after sending.
     event.preventDefault();
@@ -46,9 +42,8 @@ class Main extends Component {
     return result.length > 0 ? (
       <div>
         <span>Results:</span>
-        {result.map((r, i) => (
-          <div key={i}>{r.word} : {r.isBad ? 'true' : 'false'}</div>
-        ))
+        {
+          result.map((r, i) => (<div key={i}>{r.toString()}</div>))
         }
       </div>
     ) : (<div />);

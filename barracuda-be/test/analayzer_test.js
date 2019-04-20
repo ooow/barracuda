@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-import { Analyzer, Bit, checkIsBad, splitText } from '../analyzer';
+import { Analyzer, checkIsBad, splitText } from '../analyzer';
 import { describe } from 'mocha';
+import { Bit } from '../model';
 
 describe('analyzer', () => {
   describe('analyzer class', () => {
