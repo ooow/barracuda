@@ -8,7 +8,11 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: 'Этот текст абсолютно тестовый блядь', result: [] };
+    this.state = {
+      text: 'Этот текст абсолютно тестовый блядь',
+      filteredText: '',
+      result: [],
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
@@ -21,44 +25,54 @@ class Main extends Component {
   handleSend(event) {
     http.post('check', { text: this.state.text })
       .then((response) => {
-        this.setState(prevState => ({
-          ...prevState,
-          result: response.data.body.map(b => new Bit(b.data, b.isWord, b.isBad)),
-        }));
+        const bits = response.data.body
+          .map(b => new Bit(b.data, b.isWord, b.isBad));
+
+        this.setState({
+          result: bits,
+          filteredText: this.getFilteredText(bits),
+        });
       });
-    //this.setState({ text: '' }); // Clean text area after sending.
     event.preventDefault();
   }
 
-  renderResult() {
-    const { result } = this.state;
-    return result.length > 0 ? (
-      <div>
-        <span>Results:</span>
-        {
-          result.map((r, i) => (<div key={i}>{r.toString()}</div>))
-        }
-      </div>
-    ) : (<div />);
+  getFilteredText(bits) {
+    return bits.map(bit => bit.toRightString()).join('');
   }
 
   render() {
+    const { text, filteredText } = this.state;
     return (
       <div className='container'>
         <NavBar />
-        <div className='d-flex flex-column justify-content-center align-items-center bg-light'>
-          Barracuda says Hi
-          <textarea
-            className='w-75 my-4'
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-          <input
-            type='submit'
-            value='Send'
-            onClick={this.handleSend}
-          />
-          {this.renderResult()}
+        <div className='container mt-4'>
+          <div className='row justify-content-center mb-2'>
+            <span className="col text-center">
+              Please write/paste your text into this text area
+            </span>
+          </div>
+          <div className='row justify-content-center mb-2'>
+            <textarea
+              className='col-8 textarea'
+              value={text}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='row justify-content-center mb-2'>
+            <input
+              className='btn btn-primary col-3'
+              type='submit'
+              value='Send'
+              onClick={this.handleSend}
+            />
+          </div>
+          <div className='row justify-content-center mb-2'>
+            <textarea
+              readOnly
+              className='col-8 textarea'
+              value={filteredText}
+            />
+          </div>
         </div>
       </div>
     );

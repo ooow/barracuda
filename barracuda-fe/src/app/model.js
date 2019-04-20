@@ -11,4 +11,15 @@ export class Bit {
     const word = this.isWord ? 'russian word' : 'symbol';
     return `"${this.data}" is a ${bad} ${word}`;
   }
+
+  toRightString() {
+    if (this.isBad) {
+      let hidedBadWord = '';
+      for (let i = 0; i < this.data.length; i++) {
+        hidedBadWord += '*';
+      }
+      return hidedBadWord;
+    }
+    return this.data;
+  }
 }

@@ -20,13 +20,13 @@ class NavBar extends Component {
           </a>
           <span>
               <a className='navbar-brand mx-1 p-0 d-none d-sm-inline' href='/'>
-                main
+                Main
               </a>
               <a
-                className='navbar-brand mx-1 p-0 d-none d-sm-inline'
+                className='navbar-brand mx-1 p-0 d-none d-sm-inline ml-5'
                 href='/dictionary'
               >
-                dictionary
+                Dictionary
               </a>
             </span>
         </div>
