@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
-    "test": "mocha --require  @babel/register"
+    "test": "node_modules/mocha/bin/mocha --require  @babel/register"
   },
   "dependencies": {
     "cors": "^2.8.5",
