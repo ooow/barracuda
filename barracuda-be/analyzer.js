@@ -1,6 +1,8 @@
 import { Bit } from './model';
 import {badWords, badWordsReg} from './bad';
 
+const russianSymbol = /[а-я]/i;
+
 export class Analyzer {
   constructor(text = '') {
     this.arr = splitText(text);
@@ -20,7 +22,7 @@ export function splitText(text) {
 
   let word = '';
   for (let c of text) {
-    if (c.match(/[а-я]/i)) {
+    if (c.match(russianSymbol)) {
       word += c;
     } else {
       if (word.length !== 0) {

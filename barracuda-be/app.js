@@ -19,11 +19,27 @@ app.post('/addBadWord', (req, res) => {
   if (typeof badWord === 'string' && badWord.length > 1) {
     badWords.add(badWord.toLowerCase());
     res.status(200);
-    res.send('The word is added');
+    res.send(`The ${badWord} is added`);
   }
   else {
+    // TODO: Handle error.
     res.status(400);
-    res.send('Bad request');
+    res.send();
+  }
+});
+
+app.post('/removeBadWord', (req, res) => {
+  const badWord = req.body.badWord;
+  if (typeof badWord === 'string' && badWord.length > 1
+    && badWords.has(badWord.toLowerCase())) {
+    badWords.delete(badWord);
+    res.status(200);
+    res.send(`The ${badWord} is removed`);
+  }
+  else {
+    // TODO: Handle error.
+    res.status(404);
+    res.send();
   }
 });
 
