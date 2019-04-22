@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../../components/NavBar';
 import { http } from '../../axios';
 
-/** Component renders the main page. */
+/** Component renders the Dictionary page. */
 class Dictionary extends Component {
   constructor(props) {
     super(props);

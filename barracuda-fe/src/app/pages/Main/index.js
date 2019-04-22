@@ -3,7 +3,7 @@ import { Bit } from '../../model';
 import { http } from '../../axios';
 import NavBar from '../../components/NavBar';
 
-/** Component renders the main page. */
+/** Component renders the Main page. */
 class Main extends Component {
 
   constructor(props) {

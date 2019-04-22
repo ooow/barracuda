@@ -41,7 +41,7 @@ export function checkIsBad(bit) {
   if (!bit.isWord) {
     return bit;
   }
-  if (badWords.has(bit.data)) {
+  if (badWords.has(bit.data.toLowerCase())) {
     bit.isBad = true;
   }
   return bit;

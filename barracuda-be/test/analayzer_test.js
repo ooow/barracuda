@@ -131,6 +131,14 @@ describe('analyzer', () => {
         expect(checkIsBad(new Bit('блядь')).isBad).to.be.true;
       });
 
+      it('marks the bit in camel case as bad', () => {
+        expect(checkIsBad(new Bit('Блядь')).isBad).to.be.true;
+      });
+
+      it('marks the bit in upper case as bad', () => {
+        expect(checkIsBad(new Bit('БЛЯДЬ')).isBad).to.be.true;
+      });
+
       it('skips symbol', () => {
         expect(checkIsBad(new Bit(';')).isBad).to.be.false;
       });

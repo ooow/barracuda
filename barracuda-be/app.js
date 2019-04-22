@@ -17,7 +17,7 @@ app.post('/check', (req, res) => {
 app.post('/addBadWord', (req, res) => {
   const badWord = req.body.badWord;
   if (typeof badWord === 'string' && badWord.length > 1) {
-    badWords.add(badWord);
+    badWords.add(badWord.toLowerCase());
     res.status(200);
     res.send('The word is added');
   }

@@ -28,7 +28,13 @@ class NavBar extends Component {
               >
                 Dictionary
               </a>
-            </span>
+             <a
+               className='navbar-brand mx-1 p-0 d-none d-sm-inline ml-5'
+               href='/info'
+             >
+                Info
+              </a>
+          </span>
         </div>
       </nav>
     );
