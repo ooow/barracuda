@@ -4,6 +4,32 @@
  * Additional custom classes in bootstrap style for using in the project.
  */
 
+.ripple {
+  cursor: pointer;
+  background-position: center;
+  transition: background 0.8s;
+
+  &:hover {
+    background: $half-secondary radial-gradient(circle, transparent 1%, $secondary 1%) center/15000%;
+  }
+
+  &:active {
+    background-color: $half-secondary;
+    background-size: 100%;
+    transition: background 0s;
+  }
+}
+
+.icon-button {
+  align-items: center;
+  border-radius: 33px;
+  display: flex;
+  flex-direction: column;
+  height: 67px;
+  justify-content: center;
+  width: 67px;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
