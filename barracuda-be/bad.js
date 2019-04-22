@@ -295,3 +295,12 @@ export const badWords = new Set([
   'целка',
   'шлюха',
 ]);
+
+export function badWordsReg(word){
+  return [
+    /((п|p)(и|e|е|ё|i)(з|с|z|s)(д|d))/gi,
+  ].some(function(regexp){
+    console.log(word);
+    return regexp.test(word);
+  });
+}

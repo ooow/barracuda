@@ -1,5 +1,5 @@
 import { Bit } from './model';
-import { badWords } from './bad';
+import {badWords, badWordsReg} from './bad';
 
 export class Analyzer {
   constructor(text = '') {
@@ -42,6 +42,9 @@ export function checkIsBad(bit) {
     return bit;
   }
   if (badWords.has(bit.data.toLowerCase())) {
+    bit.isBad = true;
+  }
+  if (Boolean(badWordsReg(bit.data.toLowerCase()))) {
     bit.isBad = true;
   }
   return bit;

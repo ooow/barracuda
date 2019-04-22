@@ -1,7 +1,7 @@
-import { expect } from 'chai';
-import { Analyzer, checkIsBad, splitText } from '../analyzer';
-import { describe } from 'mocha';
-import { Bit } from '../model';
+import {expect} from 'chai';
+import {Analyzer, checkIsBad, splitText} from '../analyzer';
+import {describe} from 'mocha';
+import {Bit} from '../model';
 
 describe('analyzer', () => {
   describe('analyzer class', () => {
@@ -145,6 +145,17 @@ describe('analyzer', () => {
 
       it('does not mark common word', () => {
         expect(checkIsBad(new Bit('привет')).isBad).to.be.false;
+      });
+
+      describe('checkIsBad using pizda regexp', () => {
+          it('does mark as bad', () => {
+              expect(checkIsBad(new Bit('пизд')).isBad).to.be.true;
+              expect(checkIsBad(new Bit('пeзд')).isBad).to.be.true;
+          });
+
+          it('does not mark as bad similar word', () => {
+              expect(checkIsBad(new Bit('поезд')).isBad).to.be.false;
+          });
       });
     });
   });
