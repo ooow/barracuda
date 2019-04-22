@@ -1,5 +1,5 @@
 import { Bit } from './model';
-import {badWords, badWordsReg} from './bad';
+import { badWords, badWordsReg } from './bad';
 
 const russianSymbol = /[а-я]/i;
 
@@ -50,4 +50,10 @@ export function checkIsBad(bit) {
     bit.isBad = true;
   }
   return bit;
+}
+
+// Returns true if the word is exist in the base.
+export function isBadWordExist(badWord) {
+  return typeof badWord === 'string' && badWord.length > 1
+    && badWords.has(badWord.toLowerCase());
 }

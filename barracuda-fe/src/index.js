@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import Router from './app/router';
 import './index.scss';
+import { toast } from 'react-toastify';
+import './common/toastify.scss';
 
 /** The Barracuda. */
 class Index extends Component {
@@ -13,6 +15,10 @@ class Index extends Component {
     );
   }
 }
+
+toast.configure({
+  autoClose: 3000,
+});
 
 ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();

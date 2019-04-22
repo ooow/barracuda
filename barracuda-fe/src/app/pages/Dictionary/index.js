@@ -5,6 +5,8 @@ import Plus from '../../assets/images/plus.svg';
 import Cancel from '../../assets/images/cancel.svg';
 import Cloud from '../../assets/images/cloud.svg';
 import Umbrella from '../../assets/images/umbrella.svg';
+import { toast } from 'react-toastify';
+import { validateWord } from '../../analyzer';
 
 /** Component renders the Dictionary page. */
 class Dictionary extends Component {
@@ -34,38 +36,32 @@ class Dictionary extends Component {
   }
 
   submitBadWord(event) {
-    const { addInputValue } = this.state;
+    const { addInputValue } = this.state;  // Always valid value.
 
-    // TODO: Add validation.
-    if (addInputValue.length > 1) {
-      http.post('addBadWord', { badWord: addInputValue })
-        .then((response) => {
-          alert(response.data);
-          this.setState({ addInputValue: '' });
-          this.updateDictionarySize();
-        })
-        .catch(() => {
-          alert(`Bad request: The ${addInputValue} is not Russian word.`);
-        });
-    }
+    http.post('addBadWord', { badWord: addInputValue })
+      .then(() => {
+        toast(`Saved: ${addInputValue}`);
+        this.setState({ addInputValue: '' });
+        this.updateDictionarySize();
+      })
+      .catch(() => {
+        toast.error(`The word: "${addInputValue}" already exists/not allowed`);
+      });
     event.preventDefault();
   }
 
   removeBadWord(event) {
-    const { removeInputValue } = this.state;
+    const { removeInputValue } = this.state; // Always valid value.
 
-    // TODO: Add validation.
-    if (removeInputValue.length > 1) {
-      http.post('removeBadWord', { badWord: removeInputValue })
-        .then((response) => {
-          alert(response.data);
-          this.setState({ removeInputValue: '' });
-          this.updateDictionarySize();
-        })
-        .catch(() => {
-          alert(`Bad request: The ${removeInputValue} is not exist`);
-        });
-    }
+    http.post('removeBadWord', { badWord: removeInputValue })
+      .then(() => {
+        toast(`Removed: ${removeInputValue}`);
+        this.setState({ removeInputValue: '' });
+        this.updateDictionarySize();
+      })
+      .catch(() => {
+        toast.error(`The word: ${removeInputValue} not found`);
+      });
     event.preventDefault();
   }
 
@@ -99,7 +95,7 @@ class Dictionary extends Component {
                     <input
                       type="text"
                       className='w-100 custom-form-control-input'
-                      placeholder='bad word'
+                      placeholder='write a single bad Russian word'
                       value={addInputValue}
                       onChange={this.addInputValueChange}
                     />
@@ -107,6 +103,7 @@ class Dictionary extends Component {
                       className='btn btn-secondary w-100 mt-1'
                       type="submit"
                       value="Submit"
+                      disabled={!validateWord(addInputValue)}
                     />
                   </form>
                 </div>
@@ -124,7 +121,7 @@ class Dictionary extends Component {
                     <input
                       type="text"
                       className='w-100 custom-form-control-input'
-                      placeholder='bad word'
+                      placeholder='write a single bad Russian word'
                       value={removeInputValue}
                       onChange={this.removeInputValueChange}
                     />
@@ -132,6 +129,7 @@ class Dictionary extends Component {
                       className='btn btn-secondary w-100 mt-1'
                       type="submit"
                       value="Remove"
+                      disabled={!validateWord(removeInputValue)}
                     />
                   </form>
                 </div>
