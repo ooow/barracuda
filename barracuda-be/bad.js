@@ -296,7 +296,11 @@ export const badWords = new Set([
     'шлюха',
 ]);
 
-const regExps = [/(п+(и|е|ё)+(з|с)+д+)/gi,];
+const regExps = [
+    /(п+(и|е|ё)+(з|с)+д+)/gi,
+    /([^а-я])*(б+и?л(я|е)+(д|т|[^а-я]))/gi,
+    /([^а-я])*(х+у+(й|е|ё|и|я|ли[^а-я]|э))/gi,
+];
 
 export const badWordsReg = (word) => {
     return regExps.some(regexp => regexp.test(word));

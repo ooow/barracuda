@@ -169,6 +169,38 @@ describe('analyzer', () => {
               expect(checkIsBad(new Bit('пистолет')).isBad).to.be.false;
           });
       });
-    });
+
+      describe('using blyad regexp', () => {
+          it('marks бля as bad', () => {
+              expect(checkIsBad(new Bit('бля')).isBad).to.be.true;
+          });
+
+          it('marks ббббббляяяяя as bad', () => {
+              expect(checkIsBad(new Bit('ббббббляяяяя')).isBad).to.be.true;
+          });
+
+          it('marks выблeдок as bad', () => {
+              expect(checkIsBad(new Bit('выблeдок')).isBad).to.be.true;
+          });
+
+          it('does not mark рубль as bad', () => {
+              expect(checkIsBad(new Bit('рубль')).isBad).to.be.false;
+          });
+        });
+
+        describe('using hui regexp', () => {
+            it('marks хуйль as bad', () => {
+                expect(checkIsBad(new Bit('хуйль')).isBad).to.be.true;
+            });
+
+            it('marks нахуууууууй as bad', () => {
+                expect(checkIsBad(new Bit('нахуууууууй')).isBad).to.be.true;
+            });
+
+            it('marks хуйло as bad', () => {
+                expect(checkIsBad(new Bit('хуйло')).isBad).to.be.true;
+            });
+        });
+      });
   });
 });
