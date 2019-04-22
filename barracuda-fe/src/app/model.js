@@ -1,4 +1,4 @@
-// Interface.
+/** An interface for wrapping analyzed parts of the text. */
 export class Bit {
   constructor(data, isWord = true, isBad = false) {
     this.data = data;
@@ -21,5 +21,14 @@ export class Bit {
       return hidedBadWord;
     }
     return this.data;
+  }
+}
+
+/** An interface for wrapping the checking result stats. */
+export class Stats {
+  constructor(filteredSymbols, badWordsFound, badWordsAdded = 0) {
+    this.filteredSymbols = filteredSymbols;
+    this.badWordsFound = badWordsFound;
+    this.badWordsAdded = badWordsAdded;
   }
 }
