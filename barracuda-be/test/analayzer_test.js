@@ -179,10 +179,6 @@ describe('analyzer', () => {
               expect(checkIsBad(new Bit('ббббббляяяяя')).isBad).to.be.true;
           });
 
-          it('marks выблeдок as bad', () => {
-              expect(checkIsBad(new Bit('выблeдок')).isBad).to.be.true;
-          });
-
           it('does not mark рубль as bad', () => {
               expect(checkIsBad(new Bit('рубль')).isBad).to.be.false;
           });
@@ -193,8 +189,12 @@ describe('analyzer', () => {
                 expect(checkIsBad(new Bit('хуйль')).isBad).to.be.true;
             });
 
-            it('marks нахуууууууй as bad', () => {
-                expect(checkIsBad(new Bit('нахуууууууй')).isBad).to.be.true;
+            it('marks нааааахуууууууй as bad', () => {
+                expect(checkIsBad(new Bit('нааааахуууууууй')).isBad).to.be.true;
+            });
+
+            it('marks нахуй as bad', () => {
+                expect(checkIsBad(new Bit('нахуй')).isBad).to.be.true;
             });
 
             it('marks хуйло as bad', () => {
