@@ -147,14 +147,26 @@ describe('analyzer', () => {
         expect(checkIsBad(new Bit('привет')).isBad).to.be.false;
       });
 
-      describe('checkIsBad using pizda regexp', () => {
-          it('does mark as bad', () => {
+      describe('using pizd regexp', () => {
+          it('marks пизд as bad', () => {
               expect(checkIsBad(new Bit('пизд')).isBad).to.be.true;
-              expect(checkIsBad(new Bit('пeзд')).isBad).to.be.true;
           });
 
-          it('does not mark as bad similar word', () => {
+          it('marks ппппппииеиизссдец as bad', () => {
+              expect(checkIsBad(new Bit('ппппппииеиизссдец')).isBad).to.be.true;
+          });
+
+          it('does not mark поезд as bad', () => {
               expect(checkIsBad(new Bit('поезд')).isBad).to.be.false;
+          });
+
+          it('does not mark пес/пёс as bad', () => {
+              expect(checkIsBad(new Bit('пес')).isBad).to.be.false;
+              expect(checkIsBad(new Bit('пёс')).isBad).to.be.false;
+          });
+
+          it('does not mark пистолет as bad', () => {
+              expect(checkIsBad(new Bit('пистолет')).isBad).to.be.false;
           });
       });
     });
