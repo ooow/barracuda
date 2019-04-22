@@ -9,14 +9,6 @@ import Bug from '../../assets/images/ticks.svg';
 
 /** Component renders stats panel. */
 class StatsPanel extends Component {
-
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //     //   stats: this.props.stats,
-    //     // };
-  }
-
   render() {
     const { stats } = this.props;
     return (
