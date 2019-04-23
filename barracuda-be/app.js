@@ -4,8 +4,6 @@ import { Analyzer } from './analyzer';
 import { badWords, removeFromStore, updateStore } from './bad';
 import { Rate } from './model';
 
-// TODO: Add more reg exps. FIX the tests.
-
 const app = express();
 app.use(cors());
 app.use(express.json());

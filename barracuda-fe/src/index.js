@@ -17,7 +17,7 @@ class Index extends Component {
 }
 
 toast.configure({
-  autoClose: 3000,
+  autoClose: 2000,
   pauseOnHover: false,
 });
 

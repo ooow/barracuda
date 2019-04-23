@@ -32,8 +32,11 @@ class Info extends Component {
           <div className='mt-4'>
             The <strong>&quot;Barracuda</strong> is invented by
             <strong> Goga Tirkiya</strong>
-            <div className='mt-4'>email: tirkiya@icloud.com</div>
-            <div>the project source code:
+            <div className='mt-4'>
+              Email: <strong>tirkiya@icloud.com</strong>
+            </div>
+            <div>
+              Source code:
               <a
                 className='mx-1 p-0 d-none d-sm-inline'
                 href='https://github.com/ooow/barracuda'
@@ -43,7 +46,8 @@ class Info extends Component {
                 https://github.com/ooow/barracuda
               </a>
             </div>
-            <div>License:
+            <div>
+              License:
               <a
                 className='mx-1 p-0 d-none d-sm-inline'
                 href='https://opensource.org/licenses/MIT'
