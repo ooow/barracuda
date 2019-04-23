@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { Analyzer, isBadWordExist } from './analyzer';
-import { badWords } from './bad';
+import { badWords, removeFromStore, updateStore } from './bad';
 
 // TODO: Add more reg exps. FIX the tests.
 // TODO: Move the bad word library to json file. read/write.
@@ -23,7 +23,7 @@ app.post('/check', (req, res) => {
 app.post('/addBadWord', (req, res) => {
   const badWord = req.body.badWord;
   if (!isBadWordExist(badWord)) {
-    badWords.add(badWord.toLowerCase());
+    updateStore(badWord);
     res.status(200);
     res.send();
   }
@@ -37,7 +37,7 @@ app.post('/addBadWord', (req, res) => {
 app.post('/removeBadWord', (req, res) => {
   const badWord = req.body.badWord;
   if (isBadWordExist(badWord)) {
-    badWords.delete(badWord);
+    removeFromStore(badWord);
     res.status(200);
     res.send();
   }
