@@ -77,6 +77,8 @@ class StatsPanel extends Component {
             <div
               className='ripple icon-button'
               title='Bad'
+              role='button'
+              tabIndex={0}
               onClick={this.rate.bind(this, 25)}
             >
               <img
@@ -89,6 +91,8 @@ class StatsPanel extends Component {
             <div
               className='ripple icon-button'
               title='Nice'
+              role='button'
+              tabIndex={0}
               onClick={this.rate.bind(this, 50)}
             >
               <img
@@ -101,6 +105,8 @@ class StatsPanel extends Component {
             <div
               className='ripple icon-button'
               title='Good'
+              role='button'
+              tabIndex={0}
               onClick={this.rate.bind(this, 75)}
             >
               <img
@@ -113,6 +119,8 @@ class StatsPanel extends Component {
             <div
               className='ripple icon-button'
               title='Excellent'
+              role='button'
+              tabIndex={0}
               onClick={this.rate.bind(this, 100)}
             >
               <img
