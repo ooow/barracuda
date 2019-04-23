@@ -4,6 +4,9 @@
  * Additional custom classes in bootstrap style for using in the project.
  */
 
+// Bootstrap configs.
+$enable-rounded: false;
+
 .ripple {
   cursor: pointer;
   background-position: center;
@@ -46,6 +49,11 @@
   min-height: 80px;
   max-height: 250px;
   height: 250px;
+
+  &:focus-within {
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 .wh-20px {
@@ -59,13 +67,6 @@
 }
 
 input {
-  &:focus-within {
-    box-shadow: none;
-    outline: none;
-  }
-}
-
-textarea {
   &:focus-within {
     box-shadow: none;
     outline: none;

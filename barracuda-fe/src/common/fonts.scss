@@ -2,24 +2,16 @@
  * General stylesheet file with all project fonts.
  */
 
-/* TODO: Remove useless font faces before release */
-
 /* @Google Font Lato */
 @font-face {
   font-family: Lato;
-  font-weight: 100;
-  src: url('app/assets/fonts/Lato/Hairline.ttf');
-}
-
-@font-face {
-  font-family: Lato;
-  font-weight: 300;
+  font-weight: 400;
   src: url('app/assets/fonts/Lato/Light.ttf');
 }
 
 @font-face {
   font-family: Lato;
-  font-weight: 400;
+  font-weight: 500;
   src: url('app/assets/fonts/Lato/Regular.ttf');
 }
 
@@ -27,12 +19,6 @@
   font-family: Lato;
   font-weight: 700;
   src: url('app/assets/fonts/Lato/Bold.ttf');
-}
-
-@font-face {
-  font-family: Lato;
-  font-weight: 800;
-  src: url('app/assets/fonts/Lato/ExtraBold.ttf');
 }
 
 $font-family-sans-serif: Lato, sans-serif;
