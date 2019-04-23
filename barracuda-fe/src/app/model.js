@@ -28,3 +28,11 @@ export class Stats {
     this.badWordsAdded = badWordsAdded;
   }
 }
+
+/** An interface for wrapping rate. */
+export class Rate {
+  constructor(rating, filteredBadWords) {
+    this.rating = rating;
+    this.filteredBadWords = filteredBadWords;
+  }
+}

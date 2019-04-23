@@ -1,10 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import { Analyzer, isBadWordExist } from './analyzer';
+import { Analyzer } from './analyzer';
 import { badWords, removeFromStore, updateStore } from './bad';
+import { Rate } from './model';
 
 // TODO: Add more reg exps. FIX the tests.
-// TODO: Add logic for cover rating buttons.
 
 const app = express();
 app.use(cors());
@@ -21,8 +21,7 @@ app.post('/check', (req, res) => {
 /** An API point for saving bad word. */
 app.post('/addBadWord', (req, res) => {
   const { badWord } = req.body;
-  if (!isBadWordExist(badWord)) {
-    updateStore(badWord);
+  if (updateStore(badWord)) {
     res.status(200);
     res.send();
   } else {
@@ -34,8 +33,7 @@ app.post('/addBadWord', (req, res) => {
 /** An API point for removing bad word. */
 app.post('/removeBadWord', (req, res) => {
   const { badWord } = req.body;
-  if (isBadWordExist(badWord)) {
-    removeFromStore(badWord);
+  if (removeFromStore(badWord)) {
     res.status(200);
     res.send();
   } else {
@@ -44,11 +42,17 @@ app.post('/removeBadWord', (req, res) => {
   }
 });
 
+/** An API point analyzing rates. */
+app.post('/rate', (req, res) => {
+  const { rate } = req.body;
+  const rateObject = Rate.toObject(rate);
+  res.json({ body: rateObject.analyzeRate() });
+});
+
 /** An API point getting current size of the library. */
 app.get('/getDictionarySize', (req, res) => {
   res.json({ dictionarySize: badWords.size });
 });
 
-const env = process.env.NODE_ENV === 'production';
-
-app.listen(env ? 80 : 5000, () => console.log('Barracuda is launched on http://localhost:80'));
+app.listen(5000,
+  () => console.log('Barracuda BE is launched on http://localhost:5000'));
