@@ -49,4 +49,6 @@ app.get('/getDictionarySize', (req, res) => {
   res.json({ dictionarySize: badWords.size });
 });
 
-app.listen(5000, () => console.log('Barracuda is launched on http://localhost:5000'));
+const env = process.env.NODE_ENV === 'production';
+
+app.listen(env ? 80 : 5000, () => console.log('Barracuda is launched on http://localhost:80'));
