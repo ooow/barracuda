@@ -18,6 +18,10 @@
     background-size: 100%;
     transition: background 0s;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .icon-button {
