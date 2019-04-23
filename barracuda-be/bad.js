@@ -13,4 +13,3 @@ export function removeFromStore(word) {
   badWords.delete(word.toLowerCase());
   writeFileSync(store, JSON.stringify([...badWords]));
 }
-

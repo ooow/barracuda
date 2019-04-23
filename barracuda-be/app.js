@@ -4,7 +4,6 @@ import { Analyzer, isBadWordExist } from './analyzer';
 import { badWords, removeFromStore, updateStore } from './bad';
 
 // TODO: Add more reg exps. FIX the tests.
-// TODO: Move the bad word library to json file. read/write.
 // TODO: Add logic for cover rating buttons.
 
 const app = express();
@@ -21,13 +20,12 @@ app.post('/check', (req, res) => {
 
 /** An API point for saving bad word. */
 app.post('/addBadWord', (req, res) => {
-  const badWord = req.body.badWord;
+  const { badWord } = req.body;
   if (!isBadWordExist(badWord)) {
     updateStore(badWord);
     res.status(200);
     res.send();
-  }
-  else {
+  } else {
     res.status(400);
     res.send();
   }
@@ -35,13 +33,12 @@ app.post('/addBadWord', (req, res) => {
 
 /** An API point for removing bad word. */
 app.post('/removeBadWord', (req, res) => {
-  const badWord = req.body.badWord;
+  const { badWord } = req.body;
   if (isBadWordExist(badWord)) {
     removeFromStore(badWord);
     res.status(200);
     res.send();
-  }
-  else {
+  } else {
     res.status(404);
     res.send();
   }

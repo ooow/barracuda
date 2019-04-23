@@ -1,4 +1,4 @@
-// Interface.
+/** An interface for wrapping analyzed parts of the text. */
 export default class Bit {
   constructor(data, isWord = true, isBad = false) {
     this.data = data;
