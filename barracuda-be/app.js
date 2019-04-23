@@ -3,10 +3,9 @@ import cors from 'cors';
 import { Analyzer, isBadWordExist } from './analyzer';
 import { badWords } from './bad';
 
-// TODO: Add more reg exps.
+// TODO: Add more reg exps. FIX the tests.
 // TODO: Move the bad word library to json file. read/write.
 // TODO: Add logic for cover rating buttons.
-// TODO: Fill the info page.
 
 const app = express();
 app.use(cors());
