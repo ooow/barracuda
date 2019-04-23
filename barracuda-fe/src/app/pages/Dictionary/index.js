@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import NavBar from '../../components/NavBar';
-import { http } from '../../axios';
+import http from '../../axios';
 import Plus from '../../assets/images/plus.svg';
 import Cancel from '../../assets/images/cancel.svg';
 import Cloud from '../../assets/images/cloud.svg';
 import Umbrella from '../../assets/images/umbrella.svg';
-import { toast } from 'react-toastify';
-import { validateWord } from '../../analyzer';
+import validateWord from '../../analyzer';
 
 /** Component renders the Dictionary page. */
 class Dictionary extends Component {
@@ -36,7 +36,7 @@ class Dictionary extends Component {
   }
 
   submitBadWord(event) {
-    const { addInputValue } = this.state;  // Always valid value.
+    const { addInputValue } = this.state; // Always valid value.
 
     http.post('addBadWord', { badWord: addInputValue })
       .then(() => {
@@ -78,7 +78,7 @@ class Dictionary extends Component {
       <div className='container'>
         <NavBar />
         <div className='container'>
-          <div className="row">
+          <div className='row'>
 
             <div className='card mt-5 col-8 mr-3 border'>
               <div className='card-body container'>
@@ -93,7 +93,7 @@ class Dictionary extends Component {
                   </div>
                   <form onSubmit={this.submitBadWord}>
                     <input
-                      type="text"
+                      type='text'
                       className='w-100 custom-form-control-input'
                       placeholder='write a single bad Russian word'
                       value={addInputValue}
@@ -101,8 +101,8 @@ class Dictionary extends Component {
                     />
                     <input
                       className='btn btn-secondary w-100 mt-1'
-                      type="submit"
-                      value="Submit"
+                      type='submit'
+                      value='Submit'
                       disabled={!validateWord(addInputValue)}
                     />
                   </form>
@@ -119,7 +119,7 @@ class Dictionary extends Component {
                   </div>
                   <form onSubmit={this.removeBadWord}>
                     <input
-                      type="text"
+                      type='text'
                       className='w-100 custom-form-control-input'
                       placeholder='write a single bad Russian word'
                       value={removeInputValue}
@@ -127,8 +127,8 @@ class Dictionary extends Component {
                     />
                     <input
                       className='btn btn-secondary w-100 mt-1'
-                      type="submit"
-                      value="Remove"
+                      type='submit'
+                      value='Remove'
                       disabled={!validateWord(removeInputValue)}
                     />
                   </form>

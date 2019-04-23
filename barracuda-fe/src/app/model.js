@@ -14,11 +14,7 @@ export class Bit {
 
   toRightString() {
     if (this.isBad) {
-      let hidedBadWord = '';
-      for (let i = 0; i < this.data.length; i++) {
-        hidedBadWord += '*';
-      }
-      return hidedBadWord;
+      return this.data.replace(/.+/ig, '*'.repeat(this.data.length));
     }
     return this.data;
   }

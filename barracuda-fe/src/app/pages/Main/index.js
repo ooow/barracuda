@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/no-autofocus,class-methods-use-this */
 import React, { Component } from 'react';
 import { Bit, Stats } from '../../model';
-import { http } from '../../axios';
+import http from '../../axios';
 import NavBar from '../../components/NavBar';
 import StatsPanel from '../../components/StatsPanel';
 
@@ -8,22 +9,24 @@ const textareaMaxLength = 50000;
 
 /** Component renders the Main page. */
 class Main extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       text: '',
       filteredText: '',
-      result: [],
       stats: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ text: event.target.value });
-    this.check(event);
+  getFilteredText(bits) {
+    return bits.map(bit => bit.toRightString())
+      .join('');
+  }
+
+  getBadWordsCount(bits) {
+    return bits.filter(b => b.isBad).length;
   }
 
   check(event) {
@@ -34,22 +37,18 @@ class Main extends Component {
         const filteredText = this.getFilteredText(bits);
         const filteredSymbols = filteredText.length;
         const badWordsFound = this.getBadWordsCount(bits);
-        //TODO: calculate badWordsAdded.
+        // TODO: calculate badWordsAdded.
 
         this.setState({
-          result: bits,
-          filteredText: filteredText,
+          filteredText,
           stats: new Stats(filteredSymbols, badWordsFound),
         });
       });
   }
 
-  getFilteredText(bits) {
-    return bits.map(bit => bit.toRightString()).join('');
-  }
-
-  getBadWordsCount(bits) {
-    return bits.filter(b => b.isBad).length;
+  handleChange(event) {
+    this.setState({ text: event.target.value });
+    this.check(event);
   }
 
   render() {
@@ -63,7 +62,8 @@ class Main extends Component {
               autoFocus
               className='w-100 textarea border'
               value={text}
-              placeholder='Please write/paste your text into this text area. 50k limit'
+              placeholder='Please write/paste your text into this text area.
+                           50k limit'
               maxLength={textareaMaxLength}
               onChange={this.handleChange}
             />

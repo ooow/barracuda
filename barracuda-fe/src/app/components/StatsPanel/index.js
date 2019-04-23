@@ -13,38 +13,38 @@ class StatsPanel extends Component {
     const { stats } = this.props;
     return (
       <div className='d-flex justify-content-center mt-4'>
-        <div className="row w-75 border pt-3 pb-1">
+        <div className='row w-75 border pt-3 pb-1'>
           <div className='col'>
-              <span
-                className='d-flex align-items-center justify-content-center'
-                title={`${stats.filteredSymbols} filtered symbols`}
-              >
+            <span
+              className='d-flex align-items-center justify-content-center'
+              title={`${stats.filteredSymbols} filtered symbols`}
+            >
               <img
                 alt='filtered symbols'
                 className='wh-2em mr-2'
                 src={Tornado}
               />
               <p className='mb-0'>{stats.filteredSymbols} filtered symbols</p>
-              </span>
+            </span>
           </div>
           <div className='col'>
-              <span
-                className='d-flex align-items-center justify-content-center'
-                title={`${stats.badWordsFound} bad words found`}
-              >
+            <span
+              className='d-flex align-items-center justify-content-center'
+              title={`${stats.badWordsFound} bad words found`}
+            >
               <img
                 alt='Bad words found'
                 className='wh-2em mr-2'
                 src={Bug}
               />
               <p className='mb-0'>{stats.badWordsFound} bad words found</p>
-              </span>
+            </span>
           </div>
           <div className='col'>
-              <span
-                className='d-flex align-items-center justify-content-center'
-                title={`${stats.badWordsAdded} bad words saved to base`}
-              >
+            <span
+              className='d-flex align-items-center justify-content-center'
+              title={`${stats.badWordsAdded} bad words saved to base`}
+            >
               <img
                 alt='Bad words added to base'
                 className='wh-2em mr-2'
@@ -53,7 +53,7 @@ class StatsPanel extends Component {
               <p className='mb-0'>
                 {stats.badWordsAdded} bad words added to base
               </p>
-              </span>
+            </span>
           </div>
 
           <div className='w-100 mt-3 text-center text-primary'>
