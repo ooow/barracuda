@@ -45,7 +45,7 @@ app.post('/removeBadWord', (req, res) => {
 /** An API point analyzing rates. */
 app.post('/rate', (req, res) => {
   const { rate } = req.body;
-  const rateObject = Rate.toObject(rate);
+  const rateObject = Rate.copy(rate);
   res.json({ body: rateObject.analyzeRate() });
 });
 

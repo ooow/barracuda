@@ -18,6 +18,7 @@ class Index extends Component {
 
 toast.configure({
   autoClose: 3000,
+  pauseOnHover: false,
 });
 
 ReactDOM.render(<Index />, document.getElementById('root'));

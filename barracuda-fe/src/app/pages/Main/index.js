@@ -25,8 +25,8 @@ class Main extends Component {
       .join('');
   }
 
-  getBadWordsCount(bits) {
-    return bits.filter(b => b.isBad).length;
+  getBadBits(bits) {
+    return bits.filter(b => b.isBad);
   }
 
   check(event) {
@@ -36,12 +36,12 @@ class Main extends Component {
           .map(b => new Bit(b.data, b.isWord, b.isBad));
         const filteredText = this.getFilteredText(bits);
         const filteredSymbols = filteredText.length;
-        const badWordsFound = this.getBadWordsCount(bits);
+        const badBits = this.getBadBits(bits);
         // TODO: calculate badWordsAdded.
 
         this.setState({
           filteredText,
-          stats: new Stats(filteredSymbols, badWordsFound),
+          stats: new Stats(filteredSymbols, badBits),
         });
       });
   }

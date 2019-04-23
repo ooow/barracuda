@@ -15,23 +15,23 @@ export class Bit {
 
 /** An interface for wrapping rate. */
 export class Rate {
-  constructor(rating, filteredBadWords) {
+  constructor(rating, badBits) {
     this.rating = rating;
-    this.filteredBadWords = filteredBadWords;
+    this.badBits = badBits;
   }
 
   analyzeRate() {
-    const count = Math.floor(Math.random() * this.filteredBadWords.length - 1);
+    const count = Math.floor(Math.random() * this.badBits.length - 1);
     let counter = 0;
     for (let i = 0; i < count; i += 1) {
-      if (updateStore(this.filteredBadWords[i])) {
+      if (updateStore(this.badBits[i].data)) {
         counter += 1;
       }
     }
     return counter;
   }
 
-  static toObject(rate) {
-    return new Rate(rate.rating, rate.filteredBadWords);
+  static copy(rate) {
+    return new Rate(rate.rating, rate.badBits.map(b => Bit.copy(b)));
   }
 }
