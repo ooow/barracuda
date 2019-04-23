@@ -12,8 +12,17 @@ app.use(express.json());
 app.post('/check', (req, res) => {
   const analyzer = new Analyzer(req.body.text);
 
+  const dictionarySize = badWords.size;
   const result = analyzer.run();
-  res.json({ body: result });
+  const actualDictionarySize = badWords.size;
+  const difference = actualDictionarySize - dictionarySize;
+
+  const response = {
+    body: result,
+    learnedWords: difference || 0,
+  };
+
+  res.json(response);
 });
 
 /** An API point for saving bad word. */

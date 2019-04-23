@@ -22,10 +22,10 @@ export class Bit {
 
 /** An interface for wrapping the checking result stats. */
 export class Stats {
-  constructor(filteredSymbols, badBits, badWordsAdded = 0) {
+  constructor(filteredSymbols, badBits, learnedWords = 0) {
     this.filteredSymbols = filteredSymbols;
     this.badBits = badBits;
-    this.badWordsAdded = badWordsAdded;
+    this.learnedWords = learnedWords;
   }
 }
 

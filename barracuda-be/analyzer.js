@@ -1,4 +1,4 @@
-import { badWords } from './bad';
+import { badWords, updateStore } from './bad';
 import { Bit } from './model';
 
 const russianSymbol = /[а-я]/i;
@@ -82,6 +82,7 @@ export function checkIsBad(bit) {
   // Check if the bit allowed by the reg exps.
   if (badWordsReg(word)) {
     checkedBit.isBad = true;
+    updateStore(word); // Tries to learn and save new words.
   }
   return checkedBit;
 }

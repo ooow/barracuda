@@ -158,7 +158,7 @@ class StatsPanel extends Component {
           <div className='col'>
             <span
               className='d-flex align-items-center justify-content-center'
-              title={`${stats.badWordsAdded} bad words saved to base`}
+              title={`${stats.learnedWords} bad words saved to base`}
             >
               <img
                 alt='Bad words added to base'
@@ -166,7 +166,7 @@ class StatsPanel extends Component {
                 src={Sunny}
               />
               <p className='mb-0'>
-                {stats.badWordsAdded} bad words added to base
+                {stats.learnedWords} bad words added to base
               </p>
             </span>
           </div>

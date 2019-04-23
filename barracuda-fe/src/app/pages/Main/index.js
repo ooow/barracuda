@@ -37,11 +37,14 @@ class Main extends Component {
         const filteredText = this.getFilteredText(bits);
         const filteredSymbols = filteredText.length;
         const badBits = this.getBadBits(bits);
-        // TODO: calculate badWordsAdded.
 
         this.setState({
           filteredText,
-          stats: new Stats(filteredSymbols, badBits),
+          stats: new Stats(
+            filteredSymbols,
+            badBits,
+            response.data.learnedWords,
+          ),
         });
       });
   }
