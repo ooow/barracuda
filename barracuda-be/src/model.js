@@ -1,4 +1,4 @@
-import { updateStore } from './bad';
+import { updateStore } from '../bad';
 
 /** An interface for wrapping analyzed parts of the text. */
 export class Bit {
